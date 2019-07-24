@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Random Color Generator</title>
+    <!-- DEVELOPED BY SANDIP SADHUKHAN -->
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    #maindiv{
+        width:100%;
+        height: 100vh;
+        background-color:rgb(0,155,155);
+        position: relative;
+    } 
+    #centerdiv{
+        position: absolute;
+        top:35%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        
+        
+    }
+    #text{
+        /* text-align: center; */
+        font-size: 65px;
+        font-family: sans-serif;
+        color:white;
+        padding: 20px 0;
+    }
+    input{
+        padding: 10px 0;
+        width: 100%;
+        height: 20px;
+        /* text-align: center; */
+
+    }
+    #speedvaluetxt{
+        margin-top:12px;
+        background-color: rgba(255,255,255,.4);
+        padding:10px 25px;
+        font-family: sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        border-radius:12px;
+        color:rgba(0,0,0,.78);
+        text-align: center;
+        box-shadow: 0 0 10px black;
+    }
+    button{
+        border:none;
+        background-color: teal;
+        color:white;
+        margin: 30px 0;
+        padding:10px 30px;
+        font-family: sans-serif;
+        font-size: 20px;
+        box-shadow: 2px 3px 9px black;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    button:hover{
+        box-shadow: 2px 3px 19px black;
+    }
+    #copyright{
+        position: absolute;
+        color:white;
+        text-align: center;
+        width:100%;
+        background-color:rgba(0,0,0,.48);
+        padding:15px;
+        font-size: 20px;
+        font-family: verdana;
+        letter-spacing: 1px;
+        bottom:0;
+    }
+    </style>
+</head>
+<body>
+    <div id="maindiv">
+        <div id="centerdiv">
+            <div id="text">Speed</div>
+            <input id="speedvalue" type="range" size="40" step="100" value="1000" min="200" max="5000"><br>
+            <p id="speedvaluetxt">1000 ms</p>
+            <!-- <button onclick="changespeed()">Change Speed</button> -->
+            
+        </div>
+        <p id="copyright">Developed By Sandip Sadhukhan.</p>
+    </div>
+    
+   
+    <script>
+        console.clear();
+        var speed=1000;
+        var interval;
+
+        setintervalfun();
+        
+        function setintervalfun(speedvalueshow=1000){
+           
+            clearInterval(interval);
+            interval = setInterval(randombgchange,speedvalueshow);
+            console.log(speedvalueshow);
+        }
+
+        document.getElementById('speedvalue').addEventListener('input',changespeed);
+
+        function changespeed(){
+        speed=document.getElementById('speedvalue').value;
+        document.getElementById('speedvaluetxt').innerHTML=speed+' ms';
+        speed=parseInt(speed);
+        // console.log(speed);
+        setintervalfun(speed);
+        }
+        
+
+        //Random Bg Change
+        function randombgchange(){
+        let letters="123456789ABCDEF";
+        let randomcolors="#";
+        let randomletter;
+        for(let i=1;i<=6;i++){
+            randomletter=Math.floor(Math.random()*14);
+            if(randomletter==10){
+                randomletter='A';
+            }
+            else if(randomletter==11){
+                randomletter='B';
+            }
+            else if(randomletter==12){
+                randomletter='C';
+            }
+            else if(randomletter==13){
+                randomletter='D';
+            }
+            else if(randomletter==14){
+                randomletter='E';
+            }
+            else if(randomletter==15){
+                randomletter='F';
+            }
+            randomcolors+=randomletter;
+        }
+        // console.log(randomcolors.toString());
+        document.getElementById('maindiv').style.backgroundColor=randomcolors;
+        }
+    </script>
+</body>
+</html>
